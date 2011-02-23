@@ -10,6 +10,7 @@ jpath works on decoded json (mochijson2) documents as Erlang terms.  You can get
 
 Simple `get` example:
 
+    Path = [<<"simple_level">>]
     Doc = {struct,
          [{<<"simple_level">>, <<"bin_value">>},
           {<<"different_types">>,
@@ -23,12 +24,11 @@ Simple `get` example:
               {struct,
                [{<<"level_3">>,
                  {struct,
-                  [{<<"level_4">>, <<"level_4_value">>}]}}]}}]}}]}.
+                  [{<<"level_4">>, <<"level_4_value">>}]}}]}}]}}]}
 
-    <<"bin_value">> = jpath:get(<<"simple_level">>], Doc).
+    <<"bin_value">> = jpath:get(Path, Doc)
 
 Simple `set` example:
 
-    Path = [<<"simple_level">>]
     NewDoc = jpath:set(Path, Doc, "string_value")
     "string_value" = jpath:get(Path, NewDoc)
